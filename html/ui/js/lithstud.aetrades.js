@@ -26,7 +26,7 @@ var NRS = (function (NRS, $, undefined) {
         '<th colspan="2" data-i18n="quantity">Quantity</th>' +
         '<th data-i18n="price">Price</th>' +
         '<th colspan="2" data-i18n="total">Total</th>' +
-        '<th>Buyer/Seller</th>' +
+        '<th><span data-i18n="buyer">Buyer</span>/<span data-i18n="seller">Seller</span></th>' +
         '</tr>' +
         '</thead>' +
         '<tbody>' +
