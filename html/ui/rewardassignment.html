@@ -1,31 +1,55 @@
+<!DOCTYPE html>
 <html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title data-i18n="app.title">BURST Wallet</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
 <body>
-Get reward recipient:<br />
-<form method="post" action="/burst">
-<input type="hidden" name="requestType" value="getRewardRecipient">
-Account:<br />
-<input type="text" name="account"><br />
-<input type="submit" value="submit" /><br />
-</form>
-<br />
-Get accounts with recipient:<br />
-<form method="post" action="/burst">
-<input type="hidden" name="requestType" value="getAccountsWithRewardRecipient">
-Account:<br />
-<input type="text" name="account"><br />
-<input type="submit" value="submit" /><br />
-</form>
-<br />
-Set reward recipient:<br />
-<form method="post" action="/burst">
-<input type="hidden" name="requestType" value="setRewardRecipient">
-Passphrase:<br />
-<input type="password" name="secretPhrase"><br />
-Recipient:<br />
-<input type="text" name="recipient"><br />
-<input type="hidden" name="deadline" value="1440">
-<input type="hidden" name="feeNQT" value="100000000">
-<input type="submit" value="submit" /><br />
-</form>
+    <div class="container">
+        <div class="row">
+            <form action="/burst" method="POST" role="form">
+                <input type="hidden" name="requestType" value="getRewardRecipient">
+                <legend>Get rewardrecipient:</legend>
+
+                <div class="form-group">
+                    <label>Account:</label>
+                    <input type="text" name="account" class="form-control" placeholder="Numeric ID">
+                </div><br/>
+                <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <form action="/burst" method="POST" role="form">
+                <input type="hidden" name="requestType" value="getAccountsWithRewardRecipient">
+                <legend>Get accounts with recipient:</legend>
+
+                <div class="form-group">
+                    <label>Account:</label>
+                    <input type="text" name="account" class="form-control" placeholder="Numeric ID">
+                </div><br/>
+                <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <form action="/burst" method="POST" role="form">
+                <input type="hidden" name="requestType" value="setRewardRecipient">
+                <legend>Set reward recipient:</legend>
+
+                <div class="form-group">
+                    <label>Passphrase:</label>
+                    <input type="password" name="secretPhrase" class="form-control">
+                    <label>Recipient:</label>
+                    <input type="text" name="recipient" class="form-control">
+                    <input type="hidden" name="deadline" value="1440">
+                <input type="hidden" name="feeNQT" value="100000000">
+                </div>
+                <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
