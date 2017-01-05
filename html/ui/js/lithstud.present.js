@@ -44,7 +44,6 @@ var NRS = (function (NRS, $, undefined) {
         '</div>' +
         '</div>' +
         '</div>';
-    $(annHtmlTemplate).prependTo('#dashboard_page > .content');
 
 
     NRS.LithStud.Present.activate = function () {
@@ -128,6 +127,12 @@ var NRS = (function (NRS, $, undefined) {
 
     NRS.LithStud.Present.init = function () {
         currTime = Date.now();
+        if (currTime > eventEnd) { // no need to start this mod
+            if (stateInterval) {
+                clearInterval(stateInterval);
+            }
+            return;
+        }
         //console.log(eventStart + ' | ' + currTime + ' | ' + eventEnd);
         if (currTime < eventStart || currTime > eventEnd) { // lets wait 3:) 
             if (stateInterval) { // interval running
@@ -144,6 +149,8 @@ var NRS = (function (NRS, $, undefined) {
                 clearInterval(stateInterval);
             }
             //console.log('Starting Festive Mod');
+            // this should be added only during 2016.12.25 - 2016.12.31
+            $(annHtmlTemplate).prependTo('#dashboard_page > .content');
             NRS.LithStud.Present.activate(); 
         }
     }
