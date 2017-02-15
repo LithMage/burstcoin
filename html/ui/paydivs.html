@@ -33,11 +33,18 @@
                     </div>
                     <div class="panel-body" id="asset_info">
                     </div>
-                    <div id="pre_calculate" class="input-group col-lg-6 hidden">
-                        <input id="net_burst" type="number" name="burst" class="form-control" placeholder="BURST to issue">
-                        <span class="input-group-btn">
-                            <button id="calculate" type="button" class="btn btn-default">Calculate Dividends</button>
-                        </span>
+                    <div id="pre_calculate" class="hidden">
+                        <div class="input-group col-lg-6">
+                            <span class="input-group-addon">BURST:</span>
+                            <input id="net_burst" type="number" name="burst" class="form-control" placeholder="BURST to issue">
+                        </div>
+                        <div class="input-group col-lg-6">
+                            <span class="input-group-addon">TxFee:</span>
+                            <input id="burst_fee" type="number" name="burst" class="form-control" placeholder="Tx Fee (Default 1)">
+                            <span class="input-group-btn">
+                                <button id="calculate" type="button" class="btn btn-default">Calculate Dividends</button>
+                            </span>
+                        </div>
                     </div>
                 </div>
 

@@ -12,6 +12,7 @@ var BETA_DIV = (function ($, undefined) {
     var issuerAcc;
     var assetAccounts;
     var burstForDividends = 0;
+    var burstFee = 1;
     var autopayInProgress = false;
     var secretPhrase = '';
     var autoPayArray = [];
@@ -33,6 +34,9 @@ var BETA_DIV = (function ($, undefined) {
 
     $('#calculate').on('click', function () {
         burstForDividends = parseFloat($('#net_burst').val()) || 0;
+        burstFee = parseFloat($('#burst_fee').val()) || 1;
+        burstFee = convertToNQT(burstFee);
+        console.log('Fee: ' + burstFee);
         var perShare = Math.floor(burstForDividends / totalShares * 100000000) / 100000000;
         if (burstForDividends === 0) {
             alert('Incorrect BURST amount');
@@ -65,7 +69,8 @@ var BETA_DIV = (function ($, undefined) {
         }, this);
 
         $('#asset_info span').append(
-            'Total to pay: ' + tot + ' + ' + totalShareHolders + ' fees'
+            'Total to pay: ' + tot + ' + ' + (totalShareHolders * burstFee / 100000000) +
+            ' fees'
         );
 
         $('#holders_table tbody').empty().append(rows);
@@ -90,7 +95,7 @@ var BETA_DIV = (function ($, undefined) {
             requestType: "sendMoney",
             recipient: recipient,
             amountNQT: dividends,
-            feeNQT: 100000000,
+            feeNQT: burstFee,
             secretPhrase: secretPhrase,
             message: $('#message').val() || '',
             deadline: 24
