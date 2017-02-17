@@ -1,5 +1,5 @@
 /**
- * RewardAssigment v1.0
+ * RewardAssigment v1.1
  * Made by Rimvydas (LithStud) lithstud@gmail.com
  * GitHub: https://github.com/LithMage
  * 2017.02.17
@@ -164,6 +164,9 @@ var NRS = (function (NRS, $, undefined) {
                 });
             }
         });
+        // after 5 minutes check if nothing changed - also helps to find ghost unconfirmed tx
+        // if the blockchain is under heavy load
+        setTimeout(startCheckinRewardStatus, 5 * 60 * 1000);
     }
 
     function startCheckinRewardStatus() {
