@@ -170,6 +170,7 @@ var NRS = (function (NRS, $, undefined) {
     }
 
     function startCheckinRewardStatus() {
+        $('#mining_spinner').show();
         $('#reward_status').html('Changing pool <span id="reward_status_confirmations">0</span> of 4 conf.');
         NRS.sendRequest("getUnconfirmedTransactions", { // first check if there is unsent tx
             "account": NRS.account
@@ -205,7 +206,7 @@ var NRS = (function (NRS, $, undefined) {
                 NRS.LithStud.RA.getRewardAccount();
             } else {
                 if (response.transactions.length > 0) {
-                    if (response.transactions[0].sender == NRS.account) {
+                    if (response.transactions[0].sender != NRS.account) {
                         NRS.LithStud.RA.getRewardAccount();
                         return;
                     }
