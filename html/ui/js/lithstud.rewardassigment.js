@@ -128,7 +128,6 @@ var NRS = (function (NRS, $, undefined) {
     NRS.LithStud.RA.getRewardAccount = function () {
         // show we are working
         $('#mining_spinner').show();
-        hideMiningPlace();
         //console.log('Getting recipient');
         NRS.sendRequest("getRewardRecipient", {
             "account": NRS.account
@@ -140,12 +139,12 @@ var NRS = (function (NRS, $, undefined) {
                 $.growl(response.errorDescription, { "type": "danger" });
                 $('#mining_spinner').hide();
                 $('#mining_place').html(rewardAccount);
-                $('#reward_status').html('Pool set');
+                $('#reward_status').html('Pool Set');
                 showMiningPlace();
             } else if (NRS.account == response.rewardRecipient) {
                 $('#mining_spinner').hide();
                 $('#mining_place').html(rewardAccount);
-                $('#reward_status').html('Pool set');
+                $('#reward_status').html('Pool Set');
                 showMiningPlace();
             } else {
                 NRS.sendRequest("getAccount", {
@@ -159,7 +158,7 @@ var NRS = (function (NRS, $, undefined) {
                     //$('#reward_assigment_toolbar .reward-account').html(linkToRecipient);
                     $('#mining_spinner').hide();
                     $('#mining_place').html(linkToRecipient);
-                    $('#reward_status').html('Pool set');
+                    $('#reward_status').html('Pool Set');
                     showMiningPlace();
                 });
             }
@@ -170,6 +169,7 @@ var NRS = (function (NRS, $, undefined) {
     }
 
     function startCheckinRewardStatus() {
+        hideMiningPlace(); // start by hiding Pool name
         $('#mining_spinner').show();
         $('#reward_status').html('Changing pool <span id="reward_status_confirmations">0</span> of 4 conf.');
         NRS.sendRequest("getUnconfirmedTransactions", { // first check if there is unsent tx
@@ -333,41 +333,3 @@ var NRS = (function (NRS, $, undefined) {
     NRS.LithStud.RA.init(); // start this mod
     return NRS;
 }(NRS || {}, jQuery));
-
-
-
-/* setRewardRecipient response */
-/*
-{
-    "signatureHash":"384645ab55c11026dc6d36cae07f7b1c12ac4a8b8d7e7199449e307952686c65", "unsignedTransactionBytes":"14101f2abf04a005d9a600411df3e5d025e1f070de347c0a0e218035ae459a038efc4aa3d211d44a97b0e5d5c8bc5c10000000000000000000e1f5050000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000fd050500752d07f462ce501101",
-        "transactionJSON": {
-            "senderPublicKey":"d9a600411df3e5d025e1f070de347c0a0e218035ae459a038efc4aa3d211d44a",
-            "signature":"cf4b00ca362743b352413a6d8440b68a3b2e0ba36fb6a79ea40f1ef31bc5300290fe5af32d2b3d0b4c590980a0cc2185e88b95a29a505d6b02bd89991fc6c7be",
-            "feeNQT":"100000000",
-            "type":20,
-            "fullHash":"9df4821e914236981c5f112dfe76c6b1bae3c9e8b5f3d506b470e4df41f3a1b6",
-            "version":1,
-            "ecBlockId":"1247724021177855349",
-            "signatureHash":"384645ab55c11026dc6d36cae07f7b1c12ac4a8b8d7e7199449e307952686c65",
-            "attachment": {
-                "version.RewardRecipientAssignment":1
-            },
-            "senderRS":"BURST-DE6R-T5CY-VVXG-3W7R2",
-            "subtype":0,
-            "amountNQT":"0",
-            "sender":"1179024773232308375",
-            "recipientRS":"BURST-DE6R-T5CY-VVXG-3W7R2",
-            "recipient":"1179024773232308375",
-            "ecBlockHeight":329213,
-            "deadline":1440,
-            "transaction":"10968027133557011613",
-            "timestamp":79637023,
-            "height":2147483647
-        },
-        "broadcasted":true,
-        "requestProcessingTime":9248,
-        "transactionBytes":"14101f2abf04a005d9a600411df3e5d025e1f070de347c0a0e218035ae459a038efc4aa3d211d44a97b0e5d5c8bc5c10000000000000000000e1f505000000000000000000000000000000000000000000000000000000000000000000000000cf4b00ca362743b352413a6d8440b68a3b2e0ba36fb6a79ea40f1ef31bc5300290fe5af32d2b3d0b4c590980a0cc2185e88b95a29a505d6b02bd89991fc6c7be00000000fd050500752d07f462ce501101",
-        "fullHash":"9df4821e914236981c5f112dfe76c6b1bae3c9e8b5f3d506b470e4df41f3a1b6",
-        "transaction":"10968027133557011613"
-}
-*/
