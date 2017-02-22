@@ -167,7 +167,7 @@ public final class Logger {
      */
     public static void logMessageSimplified(String message, Exception exc) {
         String logMessage = message + '\n' + exc.getMessage();
-        doLog(Level.INFO, message);
+        doLog(Level.INFO, message, null);
     }
 
     /**
