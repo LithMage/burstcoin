@@ -193,7 +193,7 @@ final class BlockchainProcessorImpl implements BlockchainProcessor {
 							}
 							pushBlock(currentBlock);
 						} catch (BlockNotAcceptedException e) {
-							Logger.logMessage("Block not accepted", e);
+							Logger.logMessageSimplified("Block not accepted", e);
 							blacklistClean(currentBlock, e);
 							return;
 						}

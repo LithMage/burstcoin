@@ -160,6 +160,17 @@ public final class Logger {
     }
 
     /**
+     * Log a message with retrieved error message from exception (map to INFO)
+     *
+     * @param       message             Message
+     * @param       exc                 Exception
+     */
+    public static void logMessageSimplified(String message, Exception exc) {
+        String logMessage = message + '\n' + exc.getMessage();
+        doLog(Level.INFO, message);
+    }
+
+    /**
      * Log an exception (map to ERROR)
      *
      * @param       message             Message
