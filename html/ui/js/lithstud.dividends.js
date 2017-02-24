@@ -10,6 +10,7 @@ var BETA_DIV = (function ($, undefined) {
     var totalShareHolders = 0;
     var ignoreIssuer = true; // dont calculate divs for issuer account
     var issuerAcc;
+    var decimals = 0;
     var assetAccounts;
     var burstForDividends = 0;
     var burstFee = 1;
@@ -58,10 +59,10 @@ var BETA_DIV = (function ($, undefined) {
             if (ignoreIssuer && acc.accountRS === issuerAcc) {
                 // do nothing cause we ignore issuer
             } else {
-                divs = (acc.quantityQNT * perShare).toFixed(8);
+                divs = (convertToQNTf(acc.quantityQNT,decimals,false) * perShare).toFixed(8);
                 tot += parseFloat(divs);
                 rows += '<tr><td>' + acc.accountRS + '</td>' +
-                    '<td>' + acc.quantityQNT + '</td>' +
+                    '<td>' + convertToQNTf(acc.quantityQNT,decimals,false) + '</td>' +
                     '<td>' + divs + '</td>' +
                     '<td><button data-acc-id="' + acc.accountRS + '" data-dividends="' + divs + '" type="button" class="btn btn-default">Send!</button></td>' +
                     '</tr>';
@@ -163,11 +164,12 @@ var BETA_DIV = (function ($, undefined) {
 
         issuerAcc = response.accountRS;
         totalShareHolders = (ignoreIssuer) ? (response.numberOfAccounts - 1) : numberOfAccounts;
+        decimals = parseInt(response.decimals);
 
         $('#asset_info').empty().append(
             'Asset: ' + response.name + '<br/>' +
             'Issuer Account: ' + issuerAcc + '<br/>' +
-            'Total Amount of Shares: ' + response.quantityQNT + '<br/>' +
+            'Total Amount of Shares: ' + convertToQNTf(response.quantityQNT, decimals, false) + '<br/>' +
             'Total Share Holders: ' + totalShareHolders + '<br/>'
         );
 
@@ -202,7 +204,7 @@ var BETA_DIV = (function ($, undefined) {
             if (ignoreIssuer && acc.accountRS === issuerAcc) {
                 // do nothing cause we ignore issuer
             } else {
-                total += parseInt(acc.quantityQNT);
+                total += parseFloat(convertToQNTf(acc.quantityQNT, decimals, false));
             }
         }, this);
         return total;
@@ -262,6 +264,81 @@ var BETA_DIV = (function ($, undefined) {
 
         return result;
     }
+
+    function format (params, no_escaping) {
+		if (typeof params != "object") {
+			var amount = String(params);
+			var negative = amount.charAt(0) == "-" ? "-" : "";
+			if (negative) {
+				amount = amount.substring(1);
+			}
+			params = {
+				"amount": amount,
+				"negative": negative,
+				"afterComma": ""
+			};
+		}
+
+		var amount = String(params.amount);
+
+		var digits = amount.split("").reverse();
+		var formattedAmount = "";
+
+		for (var i = 0; i < digits.length; i++) {
+			if (i > 0 && i % 3 == 0) {
+				formattedAmount = "'" + formattedAmount;
+			}
+			formattedAmount = digits[i] + formattedAmount;
+		}
+
+		var output = (params.negative ? params.negative : "") + formattedAmount + params.afterComma;
+
+		if (!no_escaping) {
+			//output = output.escapeHTML();
+		}
+
+		return output;
+	}
+
+	function formatQuantity (quantity, decimals, no_escaping) {
+		return format(convertToQNTf(quantity, decimals, true), no_escaping);
+	}
+
+    function convertToQNTf (quantity, decimals, returnAsObject) {
+		quantity = String(quantity);
+
+		if (quantity.length < decimals) {
+			for (var i = quantity.length; i < decimals; i++) {
+				quantity = "0" + quantity;
+			}
+		}
+
+		var afterComma = "";
+
+		if (decimals) {
+			afterComma = "." + quantity.substring(quantity.length - decimals);
+			quantity = quantity.substring(0, quantity.length - decimals);
+
+			if (!quantity) {
+				quantity = "0";
+			}
+
+			afterComma = afterComma.replace(/0+$/, "");
+
+			if (afterComma == ".") {
+				afterComma = "";
+			}
+		}
+
+		if (returnAsObject) {
+			return {
+				"amount": quantity,
+				"afterComma": afterComma
+			};
+		} else {
+			return quantity + afterComma;
+		}
+	}
 
 
 }(jQuery));
