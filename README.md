@@ -1,3 +1,14 @@
+## A note from LithMage
+
+All of my mods are under MIT license unless noted otherwise.
+I will not support if mods are downloaded from other sources than the ones i posted (Google drive link by me or from this git repo).
+Please dont be shy to register an issue if it comes up hen using one of mods i made. There is a discord server set up if you would like to chat with me in person - https://discord.gg/eEedA9Z
+And afcourse donations are always wellcome! BURST address: BURST-S94A-Z3T5-TDZT-AK6NB
+
+<- Mods list to be added later ->
+
+###
+
 # Burstcoin
 
 The world's first HDD-mined cryptocurrency using the new algorithm, Proof-of-Capacity.
