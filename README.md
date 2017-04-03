@@ -12,7 +12,7 @@ If using more than one mod please put Asset Exchange Trade Log mod js file impor
   - Puts table on dashboard to show your last 10 trades in Asset Exchange - amounts are displayed from the perspective of users account.
 - Reward Assigment Mod v1.1
   - Integrates Reward Assigment Modal into wallets UI (remodels Blocks Won box on dashboard). **_Known bug_**: Fee must be 1 BURST.
-- SmartFee v1.0
+- SmartFee v1.0.1
   - Takes control of all transaction fees in wallet (except some parts that requires specific amounts and shouldnt be changed automatically). This mod will detect heavy load on network (by analyzing last block) and suggest a fee for a user to get priority in the next block. By default first time wallet is open after installation of this mod it will be disabled. To enable mod just press on the text "Disable SmartFee" **_(IE, EDGE has a known bug for not displaying checkbox near this text)_**. User can also choose in settings to enable SmartFee automatic fee management and if to ignore empty blocks. Both of these settings are enabled by default. If "Ignore Empty Blocks" enabled, mod will ignore empty blocks and use last known fee.
 - Dividends system (BETA)
   - This repository also has additional code for my dividends system reachable by going to http://127.0.0.1:8125/paydivs.html . This is in beta and should be used at your own risk. If you decide to use it please let me know and also report any strange behaviour of this code. It should support assets with decimal places. It will always round down when calculating dividends per shares, also it handles some errors silently (logging them out into console), as i said - BETA :)
