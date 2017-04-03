@@ -1,8 +1,8 @@
 /**
- * FeeSniffer v1.0
+ * FeeSniffer v1.0.1
  * Made by Rimvydas (LithStud) lithstud@gmail.com
  * GitHub: https://github.com/LithMage
- * 2017.03.01
+ * 2017.04.03
  * License: MIT
  */
 /**
@@ -212,7 +212,7 @@ var NRS = (function (NRS, $, undefined) {
         }
 
         // if there is majority fee amount increase by 1 burst to get priority, otherwise advice minBlockFee
-        return (count > txTotal / 2) ? parseFloat(txFee) + 1 : minBlockFee;
+        return (count > txTotal / 2) ? Math.floor(txFee) + 1 : minBlockFee;
     }
 
     // Retrieves last blocks transactions information for determineFee()
